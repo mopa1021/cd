@@ -1,4 +1,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /**
  * Das Modul besteht aus der Klasse {@linkcode CdReadService}.
  * @packageDocumentation
