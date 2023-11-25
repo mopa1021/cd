@@ -1,7 +1,4 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /**
  * Das Modul besteht aus der Klasse {@linkcode CdReadService}.
  * @packageDocumentation
@@ -10,8 +7,8 @@
 import { Cd, type CdGenre } from '../entity/cd.entity.js';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { QueryBuilder } from './query-builder.js';
-import RE2 from 're2';
 import { getLogger } from '../../logger/logger.js';
+import re2 from 're2';
 
 /**
  * Typdefinition für `findById`
@@ -37,7 +34,7 @@ export interface Suchkriterien {
  */
 @Injectable()
 export class CdReadService {
-    static readonly ID_PATTERN = new RE2('^[1-9][\\d]*$');
+    static readonly ID_PATTERN = new re2('^[1-9][\\d]*$');
 
     readonly #cdProps: string[];
 

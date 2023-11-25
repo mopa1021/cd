@@ -14,9 +14,9 @@ import {
 import { Cd } from '../entity/cd.entity.js';
 import { CdReadService } from './cd-read.service.js';
 import { InjectRepository } from '@nestjs/typeorm';
-import RE2 from 're2';
 import { Repository } from 'typeorm';
 import { getLogger } from '../../logger/logger.js';
+import re2 from 're2';
 
 export interface UpdateParams {
     readonly id: number | undefined;
@@ -32,7 +32,7 @@ export interface UpdateParams {
  */
 @Injectable()
 export class CdWriteService {
-    private static readonly VERSION_PATTERN = new RE2('^"\\d*"');
+    private static readonly VERSION_PATTERN = new re2('^"\\d*"');
 
     readonly #repo: Repository<Cd>;
 

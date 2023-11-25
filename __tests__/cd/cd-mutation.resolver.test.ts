@@ -1,6 +1,4 @@
 /* eslint-disable max-lines */
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable eslint-comments/no-unused-enable */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jest/no-commented-out-tests */
 
@@ -387,4 +385,4 @@ describe('GraphQL Mutations', () => {
     //     expect(extensions!.code).toBe('BAD_USER_INPUT');
     // });
 });
-/* eslint-enable max-lines, @typescript-eslint/no-extra-non-null-assertion */
+/* eslint-enable max-lines*/
