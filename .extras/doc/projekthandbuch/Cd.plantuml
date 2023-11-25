@@ -1,0 +1,55 @@
+@startuml Entity
+
+package typeorm {
+  class "@Entity" as Entity
+  hide Entity circle
+  class "@Column" as Column
+  hide Column circle
+  class "@PrimaryColumn" as PrimaryColumn
+  hide PrimaryColumn circle
+  class "@OneToMany" as OneToMany
+  hide OneToMany circle
+  class "@JoinColumn" as JoinColumn
+  hide JoinColumn circle
+  class "@ManyToOne" as ManyToOne
+  hide ManyToOne circle
+  class "@CreateDateColumn" as CreateDateColumn
+  hide CreateDateColumn circle
+  class "@UpdateDateColumn" as UpdateDateColumn
+  hide UpdateDateColumn circle
+}
+
+package cd.entity {
+  class "type CdGenre = 'POP' | 'ROCK'" as CdGenre
+  hide CdGenre circle
+
+  class Cd <<entity>> <<@Entity>> {
+    @Column() @PrimaryColumn() readonly id: number
+    @Column() readonly version: number
+    @Column() readonly isrc: string
+    @Column() readonly bewertung: number
+    @Column() readonly genre: CdGenre
+    @Column() readonly preis: number
+    @Column() readonly verfuegbar: boolean
+    @Column() readonly erscheinungsdatum: Date
+    @Column() readonly interpret: string
+    @Column() readonly titel: string
+    @CreateDateColumn() readonly erzeugt: Date
+    @UpdateDateColumn() readonly aktualisiert: Date
+  }
+
+  class Lied <<entity>> <<@Entity>> {
+    @Column() @PrimaryColumn() readonly id: number
+    @Column() readonly liedtitel: string
+    @Column() readonly laenge: string
+  }
+
+  Cd *--> "*" Lied : @OneToMany() \nlieder
+
+  Cd .left.> Entity
+  Cd .up.> CdGenre
+}
+
+hide empty members
+
+@enduml

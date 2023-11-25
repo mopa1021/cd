@@ -1,0 +1,57 @@
+@startuml Komponenten
+
+left to right direction
+
+actor RESTClient
+actor GraphQLClient
+
+node "Nest" {
+  [RequestLoggerMiddleware]
+
+  [CdController]
+  [CdResolver]
+
+  [CdService]
+
+  [Repository<Cd>]
+
+  [MailService]
+}
+
+
+cloud {
+    [TypeORM]
+}
+
+cloud {
+    [nodemailer]
+}
+
+database "DB cd" {
+    [Tabelle cd]
+    [Tabelle lied]
+}
+
+node {
+    [Mailserver]
+}
+
+RESTClient ~~> [RequestLoggerMiddleware]
+GraphQLClient ~~> [RequestLoggerMiddleware]
+
+[RequestLoggerMiddleware] ~~> [CdController]
+[RequestLoggerMiddleware] ~~> [CdResolver]
+
+[CdController] ..> [CdService]
+[CdResolver] ..> [CdService]
+[CdService] ..> [Repository<Cd>]
+
+[Repository<Cd>] ~~> [TypeORM]
+[TypeORM] ~~> [Tabelle cd]
+[TypeORM] ~~> [Tabelle lied]
+
+[CdService] ..> [MailService]
+[MailService] ~~> [nodemailer]
+[nodemailer] ~~> [Mailserver]
+
+@enduml

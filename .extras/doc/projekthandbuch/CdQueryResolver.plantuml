@@ -1,0 +1,61 @@
+@startuml Controller-Klasse
+
+interface Promise<T>
+
+package @nestjs/graphql {
+  class "@Resolver" as Resolver
+  hide Resolver circle
+
+  class "@UseInterceptors" as UseInterceptors
+  hide UseInterceptors circle
+
+  class "@Query" as Query
+  hide Query circle
+
+  class "@Args" as Args
+  hide Args circle
+
+  Resolver .left[hidden].> Promise
+}
+
+package cd {
+  package entity {
+    class Cd <<entity>>
+  }
+
+  package service {
+    class CdReadService << control >>
+  }
+
+  package graphql #DDDDDD {
+    class "type CdDTO = Omit<Cd, 'lieder' | 'aktualisiert' | 'erzeugt'" as CdDTO
+    hide CdDTO circle
+
+    interface IdInput {
+        id: number
+    }
+
+    class CdQueryResolver << control >> << @Resolver() >> << @UseInterceptors() >> {
+      + @Query() async cd(@Args() id: IdInput): Promise<CdDTO>
+      + @Query() async cds(@Args() titel: string | undefined): Promise<CdDTO[]>
+    }
+
+    CdQueryResolver o-up-> "1" CdReadService : service
+    CdQueryResolver ..> CdDTO
+    CdQueryResolver ..> IdInput
+    CdDTO ..> Cd
+    CdQueryResolver ..> Resolver
+
+    CdQueryResolver ..> Promise
+
+    CdDTO .[hidden].> Cd
+    Cd .[hidden].> Promise
+    CdReadService .[hidden].> Promise
+    Cd .[hidden].> Resolver
+    CdReadService .[hidden].> Resolver
+  }
+}
+
+hide empty members
+
+@enduml

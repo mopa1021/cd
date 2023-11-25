@@ -1,0 +1,17 @@
+@startuml Use Cases
+
+actor Gast
+actor Admin
+actor Kunde
+
+rectangle cd {
+    Gast --> (Cd suchen)
+    Admin --> (Cd suchen)
+    Admin --> (Cd anlegen)
+    Admin --> (Cd ändern)
+    Kunde --> (Cd suchen)
+    Kunde --> (Cd anlegen)
+    Kunde --> (Cd ändern)
+}
+
+@enduml

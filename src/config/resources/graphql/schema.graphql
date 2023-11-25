@@ -1,0 +1,95 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"Lesen von Cds"
+type Query {
+  cds(titel: String): [Cd!]
+
+  cd(id: ID!): Cd
+}
+
+"Anlegen von Cds"
+type Mutation {
+  create(input: CdInput!): CreatePayload
+
+  update(input: CdUpdateInput!): UpdatePayload
+
+  delete(id: ID!): Boolean
+
+  login(username: String!, password: String!): LoginResult
+}
+
+"Daten einem Lied"
+type Lied {
+  liedtitel: String!
+  laenge: String
+}
+
+"Datenschema einer Cd"
+type Cd {
+
+  id: Int!
+  version: Int!
+  isrc: String!
+  bewertung: Int
+  genre: Genre
+  preis: Float!
+  verfuegbar: Boolean
+  erscheinungsdatum: String
+  interpret: String
+  titel: String
+}
+
+enum Genre {
+  POP
+  ROCK
+}
+
+"Daten zu den Liedern"
+input LiedInput {
+  liedtitel: String!
+  laenge: String!
+}
+
+"Daten für das Anlegen einer neuen Cd"
+input CdInput {
+  isrc: String
+  bewertung: Int
+  genre: Genre
+  preis: Float
+  verfuegbar: Boolean
+  erscheinungsdatum: String
+  interpret: String
+  titel: String
+  lieder: [LiedInput!]
+}
+
+type CreatePayload {
+  id: Int
+}
+
+"Daten für die Cd, die geändert werden soll"
+input CdUpdateInput {
+  id: ID
+  version: Int
+  isrc: String
+  bewertung: Int
+  genre: Genre
+  preis: Float
+  verfuegbar: Boolean
+  erscheinungsdatum: String
+  interpret: String
+  titel: String
+}
+
+type UpdatePayload {
+  version: Int
+}
+
+type LoginResult {
+  token: String!
+  expiresIn: String!
+  roles: [String]!
+}

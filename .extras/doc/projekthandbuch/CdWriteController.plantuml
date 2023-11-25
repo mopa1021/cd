@@ -1,0 +1,107 @@
+@startuml Controller-Klasse
+
+package @nestjs/common {
+  class "@Controller" as Controller
+  hide Controller circle
+
+  class "@UseGuards" as UseGuards
+  hide UseGuards circle
+
+  class "@UseInterceptors" as UseInterceptors
+  hide UseInterceptors circle
+
+  class "@Post" as Post
+  hide Post circle
+
+  class "@Put" as Put
+  hide Put circle
+
+  class "@Delete" as Delete
+  hide Delete circle
+
+  class "@Req" as Req
+  hide Req circle
+
+  class "@Res" as Res
+  hide Res circle
+
+  class "@Param" as Param
+  hide Param circle
+
+  class "@Body" as Body
+  hide Body circle
+
+  class "@Headers" as Headers
+  hide Headers circle
+
+  UseInterceptors .[hidden].> Post
+  UseInterceptors .[hidden].> Put
+
+  Post .[hidden].> Req
+  Post .[hidden].> Res
+  Post .[hidden].> Param
+  Post .[hidden].> Body
+  Post .[hidden].> Headers
+}
+
+interface Promise<T>
+
+package express {
+  class Request
+  class Response
+
+  Response .right[hidden].> Controller
+}
+
+package security.auth {
+  class "type Role = 'ADMIN' | 'MITARBEITER' | 'KUNDE'" as Role
+  hide Role circle
+
+  class "@Roles" as Roles
+  hide Roles circle
+
+  Roles .right.> Role
+}
+
+package cd {
+  package entity #FFFFFF {
+    class Cd <<entity>>
+
+    Cd .[hidden].> Promise
+    Cd .[hidden].> Request
+  }
+
+  package service {
+    class CdWriteService << control >>
+    class CdReadService << control >>
+  }
+
+  package rest #DDDDDD {
+    class CdWriteController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
+      + @Post() @Roles() async post(@Body() cd: Cd, @Req() req: Request,  @Res() res: Response): Promise<Response>
+      + @Put() @Roles() async put(@Body() cd: Cd, @Param() id: number, @Headers() version: string, @Res() res: Response): Promise<Response>
+    }
+
+    CdWriteController o--> "1" CdWriteService : service
+    CdWriteController o--> "1" CdReadService : readService
+    CdWriteController .down.> Cd
+
+    CdWriteController ..> Controller
+
+    CdWriteController .up.> Roles
+    CdWriteController .up.> Role
+
+    CdWriteController .up.> Promise
+    CdWriteController ..> Request
+    CdWriteController ..> Response
+    
+
+    Cd .up[hidden].> Roles
+    CdWriteService .[hidden].> Request
+    CdWriteService .[hidden].> Promise
+  }
+}
+
+hide empty members
+
+@enduml

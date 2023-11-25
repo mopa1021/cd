@@ -1,0 +1,7 @@
+id;version;isrc;bewertung;genre;preis;verfuegbar;erscheinungsdatum;interpret;titel;erzeugt;aktualisiert
+1;0;DEA239810012;5;POP;20.3;true;1991-03-19;Herr Singer;Sonnenlied;2022-02-01 00:00:00;2022-02-01 00:00:00
+20;0;FRP385960117;3;POP;15.95;true;2000-12-12;Frau Singsang;Morgen;2022-02-02 00:00:00;2022-02-02 00:00:00
+30;0;CHB987654321;2;ROCK;25.99;true;1981-05-09;Herr Song;Mittag;2022-02-03 00:00:00;2022-02-03 00:00:00
+40;0;ESM565656565;1;POP;18.5;true;1990-10-03;Chor;Abend;2022-02-04 00:00:00;2022-02-04 00:00:00
+50;0;DEB193193193;2;ROCK;12.99;true;2011-09-02;Chorsinger;Wochenende;2022-02-05 00:00:00;2022-02-05 00:00:00
+60;0;SWS123412349;4;ROCK;19.99;true;2022-03-31;Frau Gesang;Tag;2022-02-06 00:00:00;2022-02-06 00:00:00

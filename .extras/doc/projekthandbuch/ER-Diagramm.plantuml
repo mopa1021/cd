@@ -1,0 +1,29 @@
+@startuml ER-Diagramm
+
+entity "Cd" {
+    *id: integer <<generated>>
+    --
+    *version: integer
+    *isrc: text
+    *bewertung: integer
+    *genre: text
+    *preis: number
+    *verfuegbar: boolean
+    *erscheinungsdatum: data
+    *interpret: text
+    *titel: text
+    *erzeugt: timestamp
+    *aktualisiert: timestamp
+}
+
+entity "Lied" {
+    *id: integer <<generated>>
+    --
+    *liedtitel: text
+    *laenge: text
+    * **cd_id**: integer <<FK>>
+}
+
+Cd ||.left.o{ Lied
+
+@enduml ER-Diagramm

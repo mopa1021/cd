@@ -1,0 +1,13 @@
+@startuml Sequenzdiagramm
+
+actor Gast
+
+boundary CdGetController
+control CdReadService
+database cd
+
+Gast -> CdGetController : GET / getById()
+CdGetController -> CdReadService: findById()
+CdReadService -> cd: [TypeORM]
+
+@enduml

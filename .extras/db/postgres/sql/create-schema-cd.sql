@@ -1,0 +1,3 @@
+CREATE SCHEMA IF NOT EXISTS AUTHORIZATION cd;
+
+ALTER ROLE cd SET search_path = 'cd';

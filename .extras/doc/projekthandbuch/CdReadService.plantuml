@@ -1,0 +1,48 @@
+@startuml Anwendungskern
+
+interface Promise<T>
+
+package @nestjs/common {
+  class "@Injectable" as Injectable
+  hide Injectable circle
+}
+
+package typeorm {
+  class Repository<T>
+}
+
+package @nestjs/typeorm {
+  class "@InjectRepository" as InjectRepository
+  hide InjectRepository circle
+}
+
+package cd {
+  package entity {
+    class Cd
+  }
+
+  package service #DDDDDD {
+    class QueryBuilder
+
+    class CdReadService << control >> <<@Injectable()>> {
+      + async findById(id: number): Promise<Cd | undefined>
+      + async find(suchkriterien?: Record<string, any>): Promise<Cd[]>
+    }
+
+    CdReadService o--> "1" QueryBuilder: queryBuilder
+    CdReadService o--> "1" Repository: @InjectRepository repo
+
+    CdReadService .up.> Injectable
+    CdReadService .up.> InjectRepository
+
+    CdReadService .up.> Promise
+    CdReadService ..> Cd
+
+    QueryBuilder .[hidden].> Repository
+    QueryBuilder .[hidden].> Cd
+  }
+}
+
+hide empty members
+
+@enduml
