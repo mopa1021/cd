@@ -222,7 +222,7 @@ pipeline {
         stage('Docker Image bauen') {
             steps {
                 echo 'TODO: Docker-Image bauen und veroeffentlichen'
-                // sh 'docker buildx build --tag juergenzimmermann/cd:2023.10.0 .'
+                // sh 'docker buildx build --tag patrickmoser/cd:2023.10.0 .'
             }
         }
 

@@ -39,7 +39,7 @@ include:
 # https://docs.docker.com/compose/compose-file/05-services
 services:
   cd:
-    image: juergenzimmermann/cd:2023.10.0-distroless
+    image: patrickmoser/cd:2023.10.0-distroless
     depends_on:
       db:
         condition: service_healthy

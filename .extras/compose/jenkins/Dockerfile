@@ -15,13 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Aufruf:   docker build --sbom true --tag juergenzimmermann/jenkins:2023.10.0 .
+# Aufruf:   docker build --sbom true --tag patrickmoser/jenkins:2023.10.0 .
 #           Get-Content Dockerfile | docker run --rm --interactive hadolint/hadolint:2.12.1-beta-debian
 #           docker compose exec jenkins bash
 #               cat /etc/os-release
 #                   ID=debian
 #                   VERSION="12 (bookworm)"
-#           docker sbom juergenzimmermann/jenkins:2023.10.0
+#           docker sbom patrickmoser/jenkins:2023.10.0
 
 # https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm
 # https://www.jenkins.io/doc/book/installing/docker

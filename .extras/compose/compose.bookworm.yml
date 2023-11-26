@@ -15,4 +15,4 @@
 
 services:
   cd:
-    image: juergenzimmermann/cd:2023.10.0-bookworm
+    image: patrickmoser/cd:2023.10.0-bookworm
