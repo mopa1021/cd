@@ -1,12 +1,12 @@
 /**
- * Das Modul besteht aus den Klassen für die Fehlerbehandlung bei GraphQL.
+ * Das Modul ist für die Behandlung der möglichen Fehler in GraphQL.
  * @packageDocumentation
  */
 
 import { GraphQLError } from 'graphql';
 /**
- * Error-Klasse für GraphQL, die einen Response mit `errors` und
- * code `BAD_USER_INPUT` produziert.
+ * Die Error-Klasse für GraphQL.
+ * Rückgabe ist `BAD_USER_INPUT` in einem Response.
  */
 export class BadUserInputError extends GraphQLError {
     constructor(message: string, exception?: Error) {

@@ -19,8 +19,7 @@ export interface BuildIdParams {
     readonly mitLiedern?: boolean;
 }
 /**
- * Die Klasse `QueryBuilder` implementiert das Lesen für Cds und greift
- * mit _TypeORM_ auf eine relationale DB zu.
+ * Die Klasse `QueryBuilder` für das Lesen von bereits vorhandenen Cds.
  */
 @Injectable()
 export class QueryBuilder {
@@ -56,7 +55,7 @@ export class QueryBuilder {
     }
 
     /**
-     * Cds asynchron suchen.
+     * Cds suchen.
      * @param suchkriterien JSON-Objekt mit Suchkriterien
      * @returns QueryBuilder
      */

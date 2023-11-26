@@ -40,14 +40,19 @@ const jestConfig: Config.InitialOptions = {
 
     transform: {
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        '\\.test\\.m?ts$': [
-            'ts-jest',
-            {
-                useESM: true,
-                isolatedModules: false,
-            },
-        ],
+        '^.+\\.tsx?$': 'ts-jest',
     },
+
+    // transform: {
+    //     // eslint-disable-next-line @typescript-eslint/naming-convention
+    //     '\\.test\\.m?ts$': [
+    //         'ts-jest',
+    //         {
+    //             useESM: true,
+    //             isolatedModules: false,
+    //         },
+    //     ],
+    // },
 
     testRegex: '__tests__\\.*\\\\.*test\\.m?ts$',
     collectCoverageFrom: ['<rootDir>/src/**/*.*ts'],

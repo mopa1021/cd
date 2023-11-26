@@ -1,21 +1,3 @@
-// Tests mit
-//  * jest      https://jestjs.io
-//  * Mocha     https://mochajs.org
-//  * node:test ab Node 18 https://nodejs.org/download/rc/v18.0.0-rc.1/docs/api/test.html
-
-// https://github.com/testjavascript/nodejs-integration-tests-best-practices
-// axios: https://github.com/axios/axios
-
-// Alternativen zu axios:
-// https://github.com/request/request/issues/3143
-// https://blog.bitsrc.io/comparing-http-request-libraries-for-2019-7bedb1089c83
-//    got         https://github.com/sindresorhus/got
-//    node-fetch  https://github.com/node-fetch/node-fetch
-//                https://fetch.spec.whatwg.org
-//                https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-//    needle      https://github.com/tomas/needle
-//    ky          https://github.com/sindresorhus/ky
-
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
 import {
@@ -44,7 +26,6 @@ const idVorhandenETag = '1';
 describe('GET /rest/:id', () => {
     let client: AxiosInstance;
 
-    // Testserver starten und dabei mit der DB verbinden
     beforeAll(async () => {
         await startServer();
         const baseURL = `https://${host}:${port}/rest`;

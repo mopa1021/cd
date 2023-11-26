@@ -26,7 +26,7 @@ import { Type } from 'class-transformer';
 export const MAX_BEWERTUNG = 5;
 
 /**
- * Entity-Klasse für Cds ohne TypeORM und ohne Referenzen.
+ * Entity-Klasse für Cds.
  */
 export class CdDtoOhneRef {
     @IsISRC()

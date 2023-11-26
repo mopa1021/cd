@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
 import {
     HttpStatus,
     type INestApplication,
@@ -40,7 +24,7 @@ const { httpsOptions } = nodeConfig;
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const dbPort: number = (typeOrmModuleOptions as any).port;
-// Verzeichnis mit compose.yml ausgehend vom Wurzelverzeichnis
+
 const dockerComposeDir = join('.extras', 'compose');
 
 let dbHealthCheck: string;
@@ -53,7 +37,7 @@ switch (dbType) {
         dbHealthCheck = 'until ping ; do sleep 1; done';
         break;
     }
-    // 'better-sqlite3' erfordert Python zum Uebersetzen, wenn das Docker-Image gebaut wird
+
     case 'sqlite': {
         dbHealthCheck = '';
         break;
@@ -67,7 +51,6 @@ switch (dbType) {
 // D B - S e r v e r   m i t   D o c k e r   C o m p o s e
 // -----------------------------------------------------------------------------
 const startDbServer = async () => {
-    // 'better-sqlite3' erfordert Python zum Uebersetzen, wenn das Docker-Image gebaut wird
     if (dbType === 'sqlite') {
         return;
     }
@@ -76,13 +59,11 @@ const startDbServer = async () => {
         return;
     }
 
-    // Container starten
     try {
         await compose.upAll({
             cwd: dockerComposeDir,
             commandOptions: [dbType],
             composeOptions: [['-f', `compose.${dbType}.yml`]],
-            // Logging beim Hochfahren des DB-Containers
             log: true,
         });
     } catch (err: unknown) {
@@ -90,14 +71,12 @@ const startDbServer = async () => {
         return;
     }
 
-    // Ist der DB-Server im Container bereit fuer DB-Anfragen?
     await compose.exec(dbType, ['sh', '-c', dbHealthCheck], {
         cwd: dockerComposeDir,
     });
 };
 
 const shutdownDbServer = async () => {
-    // 'better-sqlite3' erfordert Python zum Uebersetzen, wenn das Docker-Image gebaut wird
     if (dbType === 'sqlite') {
         return;
     }
@@ -149,7 +128,6 @@ export const shutdownServer = async () => {
     }
 };
 
-// fuer selbst-signierte Zertifikate
 export const httpsAgent = new Agent({
     requestCert: true,
     rejectUnauthorized: false,

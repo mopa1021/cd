@@ -12,14 +12,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { entities } from './entity/entities.js';
 
 /**
- * Das Modul besteht aus Controller- und Service-Klassen für die Verwaltung von
- * Cds.
+ * Das Modul beinhaltet alle Controller- und Service-Klassen für die Cds.
  * @packageDocumentation
  */
 
 /**
- * Die dekorierte Modul-Klasse mit Controller- und Service-Klassen sowie der
- * Funktionalität für TypeORM.
+ * Die dekorierte Modul-Klasse mit den Controller- und Service-Klassen für Cds.
  */
 @Module({
     imports: [MailModule, TypeOrmModule.forFeature(entities), AuthModule],

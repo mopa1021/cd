@@ -3,8 +3,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
 /**
- * Das Modul besteht aus den Klassen für die Fehlerbehandlung bei der Verwaltung
- * von Cds, z.B. beim DB-Zugriff.
+ *Das Modul ist für die Behandlung der möglichen Fehler.
  * @packageDocumentation
  */
 

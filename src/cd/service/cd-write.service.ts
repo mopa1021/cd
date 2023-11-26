@@ -1,7 +1,6 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /**
- * Das Modul besteht aus der Klasse {@linkcode CdWriteService} für die
- * Schreiboperationen im Anwendungskern.
+ * Das Modul besteht aus der Write-Service-Klasse {@linkcode CdWriteService}.
  * @packageDocumentation
  */
 
@@ -27,8 +26,7 @@ export interface UpdateParams {
 }
 
 /**
- * Die Klasse `CdWriteService` implementiert den Anwendungskern für das
- * Schreiben von Cds und greift mit _TypeORM_ auf die DB zu.
+ * Die Klasse `CdWriteService`, damit man neue Cds anlegen und bereits existierende ändern kann.
  */
 @Injectable()
 export class CdWriteService {
@@ -49,8 +47,8 @@ export class CdWriteService {
     }
 
     /**
-     * Eine neue Cd soll angelegt werden.
-     * @param cd Die neu abzulegende Cd
+     * Wenn mann eine neue Cd angelegen will.
+     * @param cd Die neu anzulegende Cd
      * @returns Die ID der neu angelegten Cd
      * @throws IsrcExists falls die ISRC-Nummer bereits existiert
      */
@@ -65,7 +63,7 @@ export class CdWriteService {
     }
 
     /**
-     * Eine vorhandene Cd soll aktualisiert werden.
+     * Wenn man eine bereits vorhandene Cd aktualisieren will.
      * @param cd Die zu aktualisierende Cd
      * @param id ID der zu aktualisierenden Cd
      * @param version Die Versionsnummer für optimistische Synchronisation

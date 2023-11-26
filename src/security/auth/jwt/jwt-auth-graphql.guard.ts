@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
 import { type ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { type BasicUser } from './jwt.strategy.js';
@@ -29,9 +13,6 @@ import { getLogger } from '../../../logger/logger.js';
  * Strategie verifiziert und das zugehoerige User-Objekt wird im Request-Objekt
  * gespeichert, damit in `RolesGuard` die Rollen bzw. Zugriffsrechte überprüft
  * werden, wenn in einem Controller @RolesAllowed() verwendet wird.
- *
- * https://github.com/nestjs/passport/blob/master/lib/auth.guard.ts
- * https://docs.nestjs.com/security/authentication#graphql
  */
 @Injectable()
 export class JwtAuthGraphQlGuard extends AuthGuard('jwt') {
@@ -40,16 +21,10 @@ export class JwtAuthGraphQlGuard extends AuthGuard('jwt') {
     /**
      * Ermittlung des Request-Objekts bei GraphQL.
      * @param context der Ausführungskontext, mit dem das Request-Objekt
-     * ermittelt wird. Siehe https://docs.nestjs.com/security/authentication#graphql
-     *
-     * `override` kann nicht verwendet werden. Details siehe in der funktionalen
-     * Implementierung in https://github.com/nestjs/passport/blob/master/lib/auth.guard.ts
+     * ermittelt wird.
      */
     override getRequest(context: ExecutionContext) {
         this.#logger.debug('getRequest');
-        // const request = GqlExecutionContext.create(context).getContext().req;
-        // this.#logger.debug(`request: ${request === undefined}`);
-        // return request as Request;
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return GqlExecutionContext.create(context).getContext().req; // type-coverage:ignore-line
     }

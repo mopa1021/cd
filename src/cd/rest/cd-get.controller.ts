@@ -1,6 +1,6 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /**
- * Das Modul besteht aus der Controller-Klasse für Lesen an der REST-Schnittstelle.
+ * Das Modul der Get-Controller-Klasse zum Lesen mit REST.
  * @packageDocumentation
  */
 
@@ -74,14 +74,7 @@ export interface CdsModel {
 }
 
 /**
- * Klasse für `CdGetController`, um Queries in _OpenAPI_ bzw. Swagger zu
- * formulieren. `CdController` hat dieselben Properties wie die Basisklasse
- * `Cd` - allerdings mit dem Unterschied, dass diese Properties beim Ableiten
- * so überschrieben sind, dass sie auch nicht gesetzt bzw. undefined sein
- * dürfen, damit die Queries flexibel formuliert werden können. Deshalb ist auch
- * immer der zusätzliche Typ undefined erforderlich.
- * Außerdem muss noch `string` statt `Date` verwendet werden, weil es in OpenAPI
- * den Typ Date nicht gibt.
+ * Klasse für `CdGetController`, damit man über Swagger Queries erzeugen und abschicken kann.
  */
 export class CdQuery implements Suchkriterien {
     @ApiProperty({ required: false })
@@ -127,17 +120,11 @@ export class CdGetController {
     }
 
     /**
-     * Ein Cd wird asynchron anhand seiner ID als Pfadparameter gesucht.
+     * Damit man eine Cd anhand ihrer ID suchen kann.
      *
-     * Falls es ein solches Cd gibt und `If-None-Match` im Request-Header
-     * auf die aktuelle Version der Cd gesetzt war, wird der Statuscode
-     * `304` (`Not Modified`) zurückgeliefert. Falls `If-None-Match` nicht
-     * gesetzt ist oder eine veraltete Version enthält, wird das gefundene
-     * Cd im Rumpf des Response als JSON-Datensatz mit Atom-Links für HATEOAS
-     * und dem Statuscode `200` (`OK`) zurückgeliefert.
-     *
-     * Falls es keine Cd zur angegebenen ID gibt, wird der Statuscode `404`
-     * (`Not Found`) zurückgeliefert.
+     * `If-None-Match` ist im Header des Requests enthalten.
+     * Wenn keine Cd mit der eingegebenen ID gefunden wird, wird der Statuscode
+     * 404 zurückgegeben.
      *
      * @param id Pfad-Parameter `id`
      * @param req Request-Objekt von Express mit Pfadparameter, Query-String,
@@ -203,15 +190,12 @@ export class CdGetController {
     }
 
     /**
-     * Cds werden mit Query-Parametern asynchron gesucht. Falls es mindestens
-     * eine solche Cd gibt, wird der Statuscode `200` (`OK`) gesetzt. Im Rumpf
-     * des Response ist das JSON-Array mit den gefundenen Cds, die jeweils
-     * um Atom-Links für HATEOAS ergänzt sind.
-     *
-     * Falls es keine Cd zu den Suchkriterien gibt, wird der Statuscode `404`
-     * (`Not Found`) gesetzt.
-     *
-     * Falls es keine Query-Parameter gibt, werden alle Cds ermittelt.
+     * Suche mit Query-Parametern nach Cds.
+     * Wenn keine Suckriterien eingegeben werden, dann werden alle
+     * vorhandenen Cds gefunden.
+     * Wenn keine Cd mit den eingegebenen Suckriterien gefunden wird, der Statuscode
+     * 404 zurückgegeben. Falls aber mindestens eine Cd gefunden wird, dann
+     * wird der Statuscode 200 zurückgegeben.
      *
      * @param query Query-Parameter von Express.
      * @param req Request-Objekt von Express.

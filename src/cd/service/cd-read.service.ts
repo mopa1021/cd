@@ -1,6 +1,6 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /**
- * Das Modul besteht aus der Klasse {@linkcode CdReadService}.
+ * Das Modul besteht aus der Read-Service-Klasse {@linkcode CdReadService}.
  * @packageDocumentation
  */
 
@@ -11,7 +11,7 @@ import { getLogger } from '../../logger/logger.js';
 import re2 from 're2';
 
 /**
- * Typdefinition für `findById`
+ * Definition für `findById`
  */
 export interface FindByIdParams {
     readonly id: number;
@@ -29,8 +29,7 @@ export interface Suchkriterien {
 }
 
 /**
- * Die Klasse `CdReadService` implementiert das Lesen für Cds und greift
- * mit _TypeORM_ auf eine relationale DB zu.
+ * Die Klasse `CdReadService` wird für das Lesen von vorhandenen Cds benötigt.
  */
 @Injectable()
 export class CdReadService {
@@ -49,10 +48,9 @@ export class CdReadService {
     }
 
     /**
-     * Eine Cd asynchron anhand seiner ID suchen
+     * Damit man eine Cd mit ihrer ID suchen kann.
      * @param id ID der gesuchten Cd
-     * @returns Die gefundene Cd vom Typ [Cd](cd_entity_cd_entity.Cd.html)
-     *          in einem Promise aus ES2015.
+     * @returns Die gefundene Cd
      * @throws NotFoundException falls keine Cd mit der ID existiert
      */
     async findById({ id, mitLiedern = false }: FindByIdParams) {
@@ -78,7 +76,7 @@ export class CdReadService {
     }
 
     /**
-     * Cds asynchron suchen.
+     * Cds suchen.
      * @param suchkriterien JSON-Objekt mit Suchkriterien
      * @returns Ein JSON-Array mit den gefundenen Cds.
      * @throws NotFoundException falls keine Cds gefunden wurden.

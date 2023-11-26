@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
@@ -31,20 +15,17 @@ export interface Payload {
     readonly username: string;
 }
 
-// Elementare User-Daten aus dem JWT-Token, d.h. noch ohne Passwort.
-// Fuer JwtAuthGuard.handleRequest() und JwtAuthGraphQlGuard.handleRequest()
 export type BasicUser = Pick<User, 'userId' | 'username'>;
 
 /**
  * Mit `JwtStrategy` wird im Konstruktor verifziert, wie ein JWT verifiziert
- * wird, z.B. mit _RS256_ (Public/Private Key) oder _HS256_ (Passwort, default).
+ * wird.
  */
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
     readonly #logger = getLogger(JwtStrategy.name);
 
     constructor() {
-        // https://stackoverflow.com/questions/55091698/nestjs-passport-jwtstrategy-never-being-called-with-rs256-tokens
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             secretOrKey: publicKey,

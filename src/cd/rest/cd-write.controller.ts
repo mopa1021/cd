@@ -1,6 +1,6 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /**
- * Das Modul besteht aus der Controller-Klasse für Schreiben an der REST-Schnittstelle.
+ * Das Modul besteht aus der Write-Controller-Klasse für das Schreiben mit REST.
  * @packageDocumentation
  */
 
@@ -62,15 +62,9 @@ export class CdWriteController {
     }
 
     /**
-     * Eine neue Ce wird asynchron angelegt. Die neu anzulegende Cd ist als
-     * JSON-Datensatz im Request-Objekt enthalten. Wenn es keine
-     * Verletzungen von Constraints gibt, wird der Statuscode `201` (`Created`)
-     * gesetzt und im Response-Header wird `Location` auf die URI so gesetzt,
-     * dass damit die neu angelegte Cd abgerufen werden kann.
-     *
-     * Falls Constraints verletzt sind, wird der Statuscode `400` (`Bad Request`)
-     * gesetzt und genauso auch wenn der Titel oder die ISRC-Nummer bereits
-     * existieren.
+     * Damit man Cds neu anlegen kann.
+     * Im Erfolgsfall wird der Statuscode 201 zurückgegeben, falls das Neuanlegen
+     * nicht funtkioniert, wird der Statuscode 400 zurückgegeben.
      *
      * @param cd JSON-Daten für eine Cd im Request-Body.
      * @param res Leeres Response-Objekt von Express.
@@ -98,23 +92,9 @@ export class CdWriteController {
     }
 
     /**
-     * Eine vorhandene Cd wird asynchron aktualisiert.
-     *
-     * Im Request-Objekt von Express muss die ID der zu aktualisierenden Cd
-     * als Pfad-Parameter enthalten sein. Außerdem muss im Rumpf die zu
-     * aktualisierende Cd als JSON-Datensatz enthalten sein. Damit die
-     * Aktualisierung überhaupt durchgeführt werden kann, muss im Header
-     * `If-Match` auf die korrekte Version für optimistische Synchronisation
-     * gesetzt sein.
-     *
-     * Bei erfolgreicher Aktualisierung wird der Statuscode `204` (`No Content`)
-     * gesetzt und im Header auch `ETag` mit der neuen Version mitgeliefert.
-     *
-     * Falls die Versionsnummer fehlt, wird der Statuscode `428` (`Precondition
-     * required`) gesetzt; und falls sie nicht korrekt ist, der Statuscode `412`
-     * (`Precondition failed`). Falls Constraints verletzt sind, wird der
-     * Statuscode `400` (`Bad Request`) gesetzt und genauso auch wenn der neue
-     * Titel oder die neue ISRC-Nummer bereits existieren.
+     * Damit man bereits exitierende Cds ändern kann.
+     * Im Erfolgsfall wird der Statuscode 204 zurückgegeben, falls das Neuanlegen
+     * nicht funktioniert, sind die Statuscodes 400, 412 und 428 möglich.
      *
      * @param cd Cddaten im Body des Request-Objekts.
      * @param id Pfad-Paramater für die ID.
@@ -199,7 +179,6 @@ export class CdWriteController {
             aktualisiert: undefined,
         };
 
-        // Rueckwaertsverweise
         cd.lieder?.forEach((lied) => {
             lied.cd = cd;
         });

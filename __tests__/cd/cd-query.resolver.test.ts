@@ -43,7 +43,6 @@ describe('GraphQL Queries', () => {
     let client: AxiosInstance;
     const graphqlPath = 'graphql';
 
-    // Testserver starten und dabei mit der DB verbinden
     beforeAll(async () => {
         await startServer();
         const baseURL = `https://${host}:${port}/`;

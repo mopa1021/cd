@@ -1,5 +1,5 @@
 /**
- * Das Modul besteht aus der Entity-Klasse.
+ * Das Modul der Entity-Klasse.
  * @packageDocumentation
  */
 
@@ -19,12 +19,12 @@ import { Lied } from './lied.entity.js';
 import { dbType } from '../../config/dbtype.js';
 
 /**
- * Alias-Typ für gültige Strings bei der Art einer Cd.
+ * Alias-Typ für die Genre, die eine Cd haben kann.
  */
 export type CdGenre = 'POP' | 'ROCK';
 
 /**
- * Entity-Klasse zu einem relationalen Tabelle
+ * Entity-Klasse der Cd
  */
 @Entity()
 export class Cd {

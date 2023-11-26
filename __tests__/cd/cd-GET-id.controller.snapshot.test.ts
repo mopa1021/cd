@@ -1,18 +1,3 @@
-// axios: https://github.com/axios/axios
-//  - wird von @nestjs/terminus verwendet
-//  - einfacher als das "fetch API", das ab Node 17.5.0 verfuegbar ist
-//    https://github.com/nodejs/node/pull/41749
-
-// Alternativen zu axios:
-// https://github.com/request/request/issues/3143
-// https://blog.bitsrc.io/comparing-http-request-libraries-for-2019-7bedb1089c83
-//    got         https://github.com/sindresorhus/got
-//    node-fetch  https://github.com/node-fetch/node-fetch
-//                https://fetch.spec.whatwg.org
-//                https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-//    needle      https://github.com/tomas/needle
-//    ky          https://github.com/sindresorhus/ky
-
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
 import {
@@ -37,7 +22,6 @@ const idVorhanden = '1';
 describe('GET /rest/:id', () => {
     let client: AxiosInstance;
 
-    // Testserver starten und dabei mit der DB verbinden
     beforeAll(async () => {
         await startServer();
         const baseURL = `https://${host}:${port}/rest`;
@@ -68,8 +52,6 @@ describe('GET /rest/:id', () => {
         // eslint-disable-next-line no-underscore-dangle
         const selfLink = data._links.self.href;
 
-        // https://jestjs.io/docs/next/snapshot-testing
-        // https://medium.com/swlh/easy-integration-testing-of-graphql-apis-with-jest-63288d0ad8d7
         expect(selfLink).toMatchSnapshot();
     });
 });

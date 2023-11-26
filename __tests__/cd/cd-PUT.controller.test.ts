@@ -72,7 +72,6 @@ describe('PUT /rest/:id', () => {
         'Content-Type': 'application/json', // eslint-disable-line @typescript-eslint/naming-convention
     };
 
-    // Testserver starten und dabei mit der DB verbinden
     beforeAll(async () => {
         await startServer();
         const baseURL = `https://${host}:${port}`;
@@ -141,8 +140,6 @@ describe('PUT /rest/:id', () => {
             expect.stringMatching(/^genre /u),
             expect.stringMatching(/^preis /u),
             expect.stringMatching(/^erscheinungsdatum /u),
-            // expect.stringMatching(/^interpret /u),
-            // expect.stringMatching(/^titel /u),
         ];
 
         // when

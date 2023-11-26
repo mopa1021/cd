@@ -1,20 +1,3 @@
-/*
- * Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 /**
  * Das Modul besteht aus der Controller-Klasse für die Authentifizierung an der
  * REST-Schnittstelle.
@@ -56,7 +39,6 @@ import { paths } from '../../config/paths.js';
 /** Entity-Klasse für Login-Daten. */
 export class Login {
     /** Benutzername */
-    // https://docs.nestjs.com/openapi/types-and-parameters
     @ApiProperty({ example: 'admin', type: String })
     username: string | undefined;
 
@@ -84,20 +66,10 @@ export class AuthController {
     }
 
     /**
-     * Im Rumpf des Request-Objekts stehen Benutzername und Passwort, um sich
-     * einzuloggen. Das Einloggen erfolgt über Passport, was durch `@UseGuards`
-     * realisiert ist. Dabei wird zunächst das Passwort mit
-     * `AuthService.validate()` überprüft und danach wird das
-     * User-Objekt in der Property "user" des Request-Objekts hinterlegt.
-     * Damit kann nun das eigentliche Einloggen in `AuthService.login` erfolgen.
-     *
-     * Falls das Einloggen erfolgreich war, wird der Statuscode `200` (`OK`)
-     * zurückgeliefert. Im Rumpf steht dann der _JSON Web Token_, der
-     * Zeitstempel für das Ablaufdatum (`expiresIn`) und ein JSON-Array mit den
-     * Rollen.
-     *
-     * Falls das Einloggen nicht erfolgreich war, wird der Statuscode `401`
-     * (`Unauthorized`) zurückgeliefert.
+     * Der Benutzername und das Passwort werden im Request-Objekt im Rumpf
+     * weitergegeben.
+     * Im Erfolgsfall wird der Statuscode 200 zurückgegeben, wen das Einloggen
+     * nicht geklappt hat, dann wird der Statuscode 401 zurückgegeben.
      *
      * @param req Request-Objekt von Express mit Property "user" durch Passport
      * @param res Leeres Response-Objekt von Express.

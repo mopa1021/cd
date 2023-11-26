@@ -8,7 +8,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { MaxLength } from 'class-validator';
 
 /**
- * Entity-Klasse für Lied ohne TypeORM.
+ * Entity-Klasse für Lied.
  */
 export class LiedDTO {
     @MaxLength(32)
